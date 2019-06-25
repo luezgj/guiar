@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="wikitude_primary">#51dde8</color>
+    <color name="wikitude_primary_dark">#429ea5</color>
+    <color name="wikitude_accent">#04e1f2</color>
+    <color name="wikitude_primary_text">#212121</color>
+    <color name="wikitude_secondary_text">#757575</color>
+    <color name="wikitude_white">#ffffff</color>
+    <color name="wikitude_divider">#BDBDBD</color>
+    <color name="wikitude_is_device_not_supported">#888888</color>
+</resources>

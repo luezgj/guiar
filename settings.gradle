@@ -1,0 +1,4 @@
+include ':wikitude-sdk-samples'
+include ':plugins'
+include ':wikitude-sdk'
+include ':app'

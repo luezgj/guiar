@@ -1,0 +1,22 @@
+[
+    {
+        "category_name": "Guia",
+        "samples": [
+            {
+                "required_extensions": [
+                    "native_detail",
+                    "geo"
+                ],
+                "name": "Guider",
+                "path": "guider/index.html",
+                "requiredFeatures": [
+                    "geo"
+                ],
+                "startupConfiguration": {
+                    "camera_position": "back",
+                    "camera_resolution": "auto"
+                }
+            }
+        ]
+    }
+]
