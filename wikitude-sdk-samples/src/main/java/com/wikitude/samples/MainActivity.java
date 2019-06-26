@@ -12,6 +12,9 @@ import com.wikitude.samples.util.adapters.SamplesExpendableListAdapter;
 import com.wikitude.samples.util.urllauncher.UrlLauncherStorageActivity;
 import com.wikitude.sdksamples.R;
 
+import com.wikitude.architect.ArchitectJavaScriptInterfaceListener;
+
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,11 +24,15 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.List;
@@ -34,7 +41,19 @@ import java.util.List;
  * The MainActivity is used to display the list of samples and handles the runtime
  * permissions for the sample activities.
  */
-public class MainActivity extends AppCompatActivity implements ArchitectUrlListener {
+public class MainActivity extends AppCompatActivity implements ArchitectJavaScriptInterfaceListener {
+    private static MainActivity singletonInstance;
+
+    public static Activity getSingletonActivity() {
+        if (singletonInstance != null)
+        {
+            return singletonInstance;
+        }
+        else{
+            singletonInstance=new MainActivity();
+            return  singletonInstance;
+        }
+    }
 
     private static final String sampleDefinitionsPath = "samples/samples.json";
     private static final int EXPANDABLE_INDICATOR_START_OFFSET = 60;
@@ -48,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements ArchitectUrlListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        singletonInstance=this;
 
         final String json = SampleJsonParser.loadStringFromAssets(this, sampleDefinitionsPath);
         categories = SampleJsonParser.getCategoriesFromJsonString(json);
@@ -87,17 +108,6 @@ public class MainActivity extends AppCompatActivity implements ArchitectUrlListe
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
-
-	public boolean urlWasInvoked(String url){
-	
-		SampleData sampleData= categories.get(1).getSamples().get(0);
-		final Intent intent = new Intent(MainActivity.this, SampleData.getActivityClass());
-		intent.putExtra(SimpleArActivity.INTENT_EXTRAS_KEY_SAMPLE, sampleData);
-		intent.putExtra(GuiderActivity.INTENT_EXTRAS_KEY_TARGETID, url.substring(url.indexOf("ID=")+3));
-		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		startActivity(intent);
-	
-	}
 
     public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
         final SampleData sampleData = categories.get(groupPosition).getSamples().get(childPosition);
@@ -229,5 +239,22 @@ public class MainActivity extends AppCompatActivity implements ArchitectUrlListe
             .setTitle(R.string.device_missing_features)
             .setMessage(errorMessage)
             .show();
+    }
+
+    @Override
+    public void onJSONObjectReceived(JSONObject jsonObject) {
+        Log.println(Log.ASSERT,"MainActivity", "Native called from JavaScript with:");
+        Log.println(Log.ASSERT,"MainActivity", jsonObject.toString());
+
+        SampleData sampleData= categories.get(1).getSamples().get(0);
+        final Intent intent = new Intent(MainActivity.this, sampleData.getActivityClass());
+        intent.putExtra(SimpleArActivity.INTENT_EXTRAS_KEY_SAMPLE, sampleData);
+        try {
+            intent.putExtra(GuiderActivity.INTENT_EXTRAS_KEY_TARGETID, jsonObject.getInt("id"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

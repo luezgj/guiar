@@ -1,5 +1,6 @@
 package com.wikitude.samples;
 
+import com.wikitude.architect.ArchitectJavaScriptInterfaceListener;
 import com.wikitude.architect.ArchitectView;
 import com.wikitude.samples.util.location.LocationProvider;
 import com.wikitude.sdksamples.R;
@@ -55,7 +56,7 @@ public class SimpleGeoArActivity extends SimpleArActivity implements LocationLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         locationProvider = new LocationProvider(this, this, errorCallback);
-        super.architectView.registerUrlListener(this.getApplicationContext());
+        super.architectView.addArchitectJavaScriptInterfaceListener(((ArchitectJavaScriptInterfaceListener)(MainActivity.getSingletonActivity())));
     }
 
     @Override

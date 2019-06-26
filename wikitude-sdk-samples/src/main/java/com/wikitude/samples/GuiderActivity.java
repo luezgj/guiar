@@ -1,3 +1,10 @@
+package com.wikitude.samples;
+
+import android.content.Intent;
+import android.os.Bundle;
+
+import com.wikitude.samples.SimpleGeoArActivity;
+
 public class GuiderActivity extends SimpleGeoArActivity {
 
     public static final String INTENT_EXTRAS_KEY_TARGETID = "targetData";
@@ -13,7 +20,7 @@ public class GuiderActivity extends SimpleGeoArActivity {
         }
 
         final int target = (int) intent.getSerializableExtra(INTENT_EXTRAS_KEY_TARGETID);
-        String str = "\"Target\":"+target;
+        String str = "setTarget("+target+")";
         
         
         super.architectView.callJavascript(str);

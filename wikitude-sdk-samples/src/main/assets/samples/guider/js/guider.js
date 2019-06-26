@@ -44,7 +44,9 @@ var World = {
     pointsPathDraws: [],
 
 
+    setTarget: function setTargetFn(targetId){
 
+    },
 
         /* Location updates, fired every time you call architectView.setLocation() in native environment. */
     locationChanged: function locationChangedFn(lat, lon, alt, acc) {
@@ -109,67 +111,69 @@ var World = {
     },
 
     locationChanged: function locationChangedFn(lat, lon, acc) {
-        AR.logger.debug("Location changed");
-        var currentLocation=new GeoPoint(lat,lon,null);
-        /*
-        if (es la primera vez || estás muy lejos del objetivo)
-            cargar el camino
-            objetivo=primer punto
-            calcular camino hasta objetivo
-            dibujarCaminoHastaObjetivo
-        if (llegaste al punto)
-            if (!es el último)
-                objetivo=siguiente punto
+        if (World.objective!=null){
+            AR.logger.debug("Location changed");
+            var currentLocation=new GeoPoint(lat,lon,null);
+            /*
+            if (es la primera vez || estás muy lejos del objetivo)
+                cargar el camino
+                objetivo=primer punto
                 calcular camino hasta objetivo
                 dibujarCaminoHastaObjetivo
-        */
+            if (llegaste al punto)
+                if (!es el último)
+                    objetivo=siguiente punto
+                    calcular camino hasta objetivo
+                    dibujarCaminoHastaObjetivo
+            */
 
 
-        //var recalc=false;  //True si hay que volver a calcular el camino
-        /*  SI ANDA MAL ES XQ LAS LLAMADADAS SON ASÍNCRONAS  */
-        //while (!recalc){
-        //    recalc=false;
-            if (!World.loadingPath){
-                if (!World.loadedPath) { //The first time called will create the path
-                    World.loadPath(currentLocation,acc); //tener cuidado xq es asíncrono
-                    World.lastObjective=false;
-                }
-            } 
-        
-        
-            if (!World.loadingPath){
-                AR.logger.debug("Not loading path");
-                if(World.currentObjetive==null){   // Si todavía no se comenzó a dibujar el camino
-                    AR.logger.debug("Objective null");
-                    World.currentObjetive= 0;
-                    if (World.currentObjetive==World.cornerPath.length-1){
-                        World.lastObjective=true;
+            //var recalc=false;  //True si hay que volver a calcular el camino
+            /*  SI ANDA MAL ES XQ LAS LLAMADADAS SON ASÍNCRONAS  */
+            //while (!recalc){
+            //    recalc=false;
+                if (!World.loadingPath){
+                    if (!World.loadedPath) { //The first time called will create the path
+                        World.loadPath(currentLocation,acc); //tener cuidado xq es asíncrono
+                        World.lastObjective=false;
                     }
-                    console.log("index: "+World.currentObjetive);
-                    console.log("cantidad de esquinas: "+World.cornerPath.length);
-                    World.makePointsPath(currentLocation,World.cornerPath[World.currentObjetive]);     //calcular camino hasta objetivo
-                    World.drawPath();
-                }else{
-                    AR.logger.debug("Hay objetivo");
-                    //if (World.farAwayPath(currentLocation)){
-                        // Si se va muy lejos del proximo punto recalcular el camino
-                        //World.loadedPath = false;
-        //                recalc=true;
-                    //}else {
-                        if(World.nextPointReached(currentLocation)){ //llegaste al siguiente punto
-                            World.ereaseNextPoint();
-                            if (World.pointsPath.length<=3 && !World.lastObjective){    //Es el final del tramo
-                                console.log("Hay que hacer un nuevo tramo");
-                                World.makePointsPath(World.cornerPath[World.currentObjetive],World.cornerPath[World.currentObjetive+1]);    //calcular camino hasta objetivo
-                                World.nextObjetive();
-                                World.drawPath();
-                            }
+                } 
+            
+            
+                if (!World.loadingPath){
+                    AR.logger.debug("Not loading path");
+                    if(World.currentObjetive==null){   // Si todavía no se comenzó a dibujar el camino
+                        AR.logger.debug("Objective null");
+                        World.currentObjetive= 0;
+                        if (World.currentObjetive==World.cornerPath.length-1){
+                            World.lastObjective=true;
                         }
-                    //}
+                        console.log("index: "+World.currentObjetive);
+                        console.log("cantidad de esquinas: "+World.cornerPath.length);
+                        World.makePointsPath(currentLocation,World.cornerPath[World.currentObjetive]);     //calcular camino hasta objetivo
+                        World.drawPath();
+                    }else{
+                        AR.logger.debug("Hay objetivo");
+                        //if (World.farAwayPath(currentLocation)){
+                            // Si se va muy lejos del proximo punto recalcular el camino
+                            //World.loadedPath = false;
+            //                recalc=true;
+                        //}else {
+                            if(World.nextPointReached(currentLocation)){ //llegaste al siguiente punto
+                                World.ereaseNextPoint();
+                                if (World.pointsPath.length<=3 && !World.lastObjective){    //Es el final del tramo
+                                    console.log("Hay que hacer un nuevo tramo");
+                                    World.makePointsPath(World.cornerPath[World.currentObjetive],World.cornerPath[World.currentObjetive+1]);    //calcular camino hasta objetivo
+                                    World.nextObjetive();
+                                    World.drawPath();
+                                }
+                            }
+                        //}
+                    }
                 }
-            }
-        //}
+            //}
 
+        }
 
     },
 
