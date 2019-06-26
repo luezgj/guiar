@@ -1,6 +1,6 @@
 class Contact{
 	constructor(telephone, email, facebook, instagram, twitter) {
-        this._telephone = _telephone;
+        this._telephone = telephone;
         this._email = email;
         this._facebook = facebook;
         this._instagram = instagram;

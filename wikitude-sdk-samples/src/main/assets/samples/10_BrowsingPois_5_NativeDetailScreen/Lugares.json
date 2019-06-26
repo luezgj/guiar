@@ -1,0 +1,50 @@
+[
+    {
+        "id":0,
+        "name": "Gluck",
+        "description": "Descripción de Gluck",
+        "category": "Cerveceria",
+        "lat": -37.3234057,
+        "long": -59.1407575 
+    },
+    {
+        "id":1,
+        "name": "Adorado",
+        "description": "Descripción de Adorado",
+        "category": "Cafeteria",
+        "lat": -37.3268144,
+        "long": -59.1358801 
+    },
+    {
+        "id":2,
+        "name": "Lo de Martin",
+        "description": "Descripción de Lo de Martin",
+        "category": "Restaurant",
+        "lat": -37.3210489,
+        "long": -59.1438484 
+    }, 
+    {
+        "id":3,
+        "name": "OGHAM",
+        "description": "Descripción de OGHAM",
+        "category": "Cerveceria",
+        "lat": -37.327253,
+        "long": -59.1376847 
+    }, 
+    {
+        "id":4,
+        "name": "Rana Baris",
+        "description": "Descripción de Rana Baris",
+        "category": "Restaurant",
+        "lat": -37.328006,
+        "long": -59.1395147 
+    }, 
+    {
+        "id":5,
+        "name": "Figlio",
+        "description": "Descripción de Figlio",
+        "category": "Cafeteria",
+        "lat": -37.3267643,
+        "long": -59.1386927 
+    } 
+]

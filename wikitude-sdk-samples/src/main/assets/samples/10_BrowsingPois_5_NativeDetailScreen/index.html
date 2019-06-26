@@ -27,6 +27,12 @@
     <!-- marker representation-->
     <script src="js/marker.js"></script>
 
+    <script type="text/javascript" src="../commons/geopoint.js"></script>
+    <script type="text/javascript" src="../commons/contact.js"></script>
+    <script type="text/javascript" src="../commons/schedule.js"></script>
+    <script type="text/javascript" src="../commons/place.js"></script>
+    <script type="text/javascript" src="../commons/Servidor.js"></script>
+
     <!-- World logic-->
     <script type="text/javascript" src="js/nativedetailscreen.js"></script>
 
@@ -40,7 +46,7 @@
     <!-- header of UI holding feature buttons -->
     <div id="header-status" data-role="header" data-position="fixed" data-theme="c">
         <a href="javascript: World.showRange();" data-icon="gear" data-inline="true" data-mini="true">Range</a>
-        <a href="javascript: World.reloadPlaces()" data-icon="refresh">Reload</a>
+        <a href="javascript: World.llamarGuia();" data-icon="refresh">Llamar guia</a>
         <h1></h1>
     </div>
 

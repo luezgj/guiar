@@ -2,8 +2,4 @@ class Schedule{
 	constructor() {
         
     }
-
-    get ?(){
-       
-    }
 }

@@ -2,19 +2,23 @@ var listOfLugares = [];
 
 function traerDatosJson(){ // LEVANTA EL ARCHIVO JSON Y LO GUARDA EN LISTOFLUGARES
     const xhttp = new XMLHttpRequest();
-
+    console.log("traerDatosJson llamado");
     xhttp.open('GET', 'Lugares.json', true);
 
     xhttp.send();
 
-    xhttp.onreadystatechange = function(){
-
+    xhttp.onreadystatechange = function(responseText){
+        console.log("Pedido cumplido");
+        console.log(responseText);
+        console.log(xhttp);
         if (this.readyState == 4 && this.status == 200){
-
+            console.log("datos parseado?");
             let datos = JSON.parse(this.responseText);
-
+            console.log("datos parseado");
             for (var input of datos){
-                var sitio = new Place(input.name, input.description, input.categories, new Contact(), new Schedule(), new GeoPoint(input.lat, input.long));
+                console.log("Un dato:");
+                var sitio = new Place(input.id, input.name, input.description, input.category, new Contact(), new Schedule(), new GeoPoint(input.lat, input.long));
+                console.log(sitio);
                 listOfLugares.push(sitio);
             }
         }

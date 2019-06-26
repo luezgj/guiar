@@ -432,6 +432,8 @@ var World = {
     requestDataFromServer: function requestDataFromServerFn(centerPointLatitude, centerPointLongitude) {
         traerDatosJson();
         var data = getLugares(centerPointLatitude, centerPointLongitude, null,  null);
+        console.log("Lugares traidos del servidor:");
+        console.log(data);
         World.loadPoisFromJsonData(data);
         World.isRequestingData = false;
 
@@ -450,6 +452,10 @@ var World = {
 
     onError: function onErrorFn(error) {
         alert(error);
+    },
+
+    llamarGuia: function llamarGuia(){
+        AR.platform.sendJSONObject("{ id:1 }");
     }
 };
 
