@@ -78,9 +78,11 @@ public class SampleJsonParser {
 
                     if (extensions != null) {
                         activityClass = ArchitectViewExtensionActivity.class;
+                    } else if (features.contains("guider")) {
+                        activityClass = SimpleGeoArActivity.class;
                     } else if (features.contains(Feature.GEO)) {
                         activityClass = SimpleGeoArActivity.class;
-                    } else {
+                    }else {
                         activityClass = SimpleArActivity.class;
                     }
 

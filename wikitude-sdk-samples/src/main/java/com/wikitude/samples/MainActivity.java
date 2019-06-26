@@ -34,7 +34,7 @@ import java.util.List;
  * The MainActivity is used to display the list of samples and handles the runtime
  * permissions for the sample activities.
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ArchitectUrlListener {
 
     private static final String sampleDefinitionsPath = "samples/samples.json";
     private static final int EXPANDABLE_INDICATOR_START_OFFSET = 60;
@@ -88,6 +88,16 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+	public boolean urlWasInvoked(String url){
+	
+		SampleData sampleData= categories.get(1).getSamples().get(0);
+		final Intent intent = new Intent(MainActivity.this, SampleData.getActivityClass());
+		intent.putExtra(SimpleArActivity.INTENT_EXTRAS_KEY_SAMPLE, sampleData);
+		intent.putExtra(GuiderActivity.INTENT_EXTRAS_KEY_TARGETID, url.substring(url.indexOf("ID=")+3));
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(intent);
+	
+	}
 
     public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
         final SampleData sampleData = categories.get(groupPosition).getSamples().get(childPosition);

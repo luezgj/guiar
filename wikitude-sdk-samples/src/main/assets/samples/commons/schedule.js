@@ -1,0 +1,9 @@
+class Schedule{
+	constructor() {
+        
+    }
+
+    get ?(){
+       
+    }
+}

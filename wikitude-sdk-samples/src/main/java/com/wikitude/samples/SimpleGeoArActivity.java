@@ -8,7 +8,6 @@ import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -56,7 +55,8 @@ public class SimpleGeoArActivity extends SimpleArActivity implements LocationLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         locationProvider = new LocationProvider(this, this, errorCallback);
-     }
+        super.architectView.registerUrlListener(this.getApplicationContext());
+    }
 
     @Override
     protected void onResume() {
@@ -88,12 +88,8 @@ public class SimpleGeoArActivity extends SimpleArActivity implements LocationLis
     public void onLocationChanged(Location location) {
         float accuracy = location.hasAccuracy() ? location.getAccuracy() : 1000;
         if (location.hasAltitude()) {
-            Log.d("Localización", "Localización cambiada con altitud");
-            Log.println(Log.ASSERT,"Lucho","Localización cambiada con altitud");
             architectView.setLocation(location.getLatitude(), location.getLongitude(), location.getAltitude(), accuracy);
         } else {
-            Log.d("Localización", "Localización cambiada sin altitud");
-            Log.println(Log.ASSERT,"Lucho","Localización cambiada sin altitud");
             architectView.setLocation(location.getLatitude(), location.getLongitude(), accuracy);
         }
     }

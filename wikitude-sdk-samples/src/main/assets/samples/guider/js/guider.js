@@ -1,8 +1,22 @@
 /* Implementation of AR-Experience (aka "World"). */
 var World = {
+
+    /* Create an AR.ImageDrawable for the marker in idle state. */
+    dot: new AR.Model("resources/circle.wt3", { scale: {x:1, y:1, z:1} } ),
+
+    // Create overlay for page one
+    //this.imgOne: ,
+
+    overlayOne: new AR.ImageDrawable(new AR.ImageResource("assets/magazine_page_one.jpeg"), 1, {
+        translate: {
+            x: -0.15,
+        }
+    }),
+
+
 	//Distance considered far away to a point
 	FAR_AWAY_DISTANCE: 0.07,	//70mts
-	FARAWAYDISTANCE: 0.001,		//1mt
+	POINT_REACHED_THRESHOLD: 0.001,		//1mt
 
 	/* List of corners that form the path */
 	cornerPath: [],
@@ -14,8 +28,8 @@ var World = {
 	objective: new GeoPoint(-37.318337,-59.121612,null),
 
 
-    // -59.121612,-37.318337  Casa de Joaco
-    // -59.125902,-37.320751  Mi casa
+    // -37.318337,-59.121612,  Casa de Joaco
+    // -37.320751,-59.125902  Mi casa
 
     /* True once path was fetched. */
     loadedPath: false,
@@ -145,6 +159,7 @@ var World = {
                         if(World.nextPointReached(currentLocation)){ //llegaste al siguiente punto
                             World.ereaseNextPoint();
                             if (World.pointsPath.length<=3 && !World.lastObjective){    //Es el final del tramo
+                                console.log("Hay que hacer un nuevo tramo");
                                 World.makePointsPath(World.cornerPath[World.currentObjetive],World.cornerPath[World.currentObjetive+1]);    //calcular camino hasta objetivo
                                 World.nextObjetive();
                                 World.drawPath();
@@ -159,9 +174,9 @@ var World = {
     },
 
     nextObjetive: function nextObjetiveFn() {
-        currentObjetive++;
-        if (currentObjetive==cornerPath.length-1){
-            lastObjective=true;
+        World.currentObjetive++;
+        if (World.currentObjetive==World.cornerPath.length-1){
+            World.lastObjective=true;
         }
     },
 
@@ -184,7 +199,8 @@ var World = {
     		return false;
     	}else{
     		if(World.pointsPath[0].getKilometros(location)<World.POINT_REACHED_THRESHOLD){  //if user are in the point
-    			return true;
+    			console.log("next point reached");
+                return true;
     		}else{
     			return false;
     		}
@@ -268,7 +284,7 @@ var World = {
 
 	ereaseNextPoint: function ereaseNextPointFn() {
     	World.pointsPath.shift(); 
-    	PointOfPath.prototype.remove(pointsPathDraws[0]);
+    	PointOfPath.prototype.remove(World.pointsPathDraws[0]);
     	World.pointsPath.shift(); 
     },
 

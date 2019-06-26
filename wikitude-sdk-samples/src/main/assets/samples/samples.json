@@ -1,16 +1,35 @@
 [
     {
-        "category_name": "Guia",
+        "category_name": "Browsing Pois",
         "samples": [
             {
                 "required_extensions": [
                     "native_detail",
                     "geo"
                 ],
+                "name": "Native Detail Screen",
+                "path": "10_BrowsingPois_5_NativeDetailScreen/index.html",
+                "requiredFeatures": [
+                    "geo"
+                ],
+                "startupConfiguration": {
+                    "camera_position": "back",
+                    "camera_resolution": "auto"
+                }
+            }
+        ]
+    },
+    {
+        "category_name": "Guider",
+        "samples": [
+            {
+                "required_extensions": [
+                    "geo"
+                ],
                 "name": "Guider",
                 "path": "guider/index.html",
                 "requiredFeatures": [
-                    "geo"
+                    "guider"
                 ],
                 "startupConfiguration": {
                     "camera_position": "back",

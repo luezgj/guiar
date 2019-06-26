@@ -14,23 +14,11 @@ function PointOfPath(geolocation) {
     }else{
         markerLocation= new AR.GeoLocation(geolocation.lat, geolocation.long, geolocation.alt);
     }
-     
-
-    /* Create an AR.ImageDrawable for the marker in idle state. */
-    this.dot = new AR.Model("resources/circle.wt3", { scale: {x:1, y:1, z:1} } );
-
-    // Create overlay for page one
-    this.imgOne = new AR.ImageResource("assets/magazine_page_one.jpeg");
-    this.overlayOne = new AR.ImageDrawable(this.imgOne, 1, {
-        translate: 
-{            x: -0.15,
-        }
-    });
 
     /* Create the AR.GeoObject with the drawable objects. */
     this.markerObject = new AR.GeoObject(markerLocation, {
         drawables: {
-            cam: this.overlayOne
+            cam: World.overlayOne
         }
     });
 
