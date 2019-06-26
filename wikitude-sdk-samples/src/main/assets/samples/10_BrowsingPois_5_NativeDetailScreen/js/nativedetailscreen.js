@@ -358,9 +358,8 @@ var World = {
                 World.isRequestingData = false;
             });
     },
-
     /* Request POI data. */
-    requestDataFromServer: function requestDataFromServerFn(centerPointLatitude, centerPointLongitude) {
+    /*requestDataFromServer: function requestDataFromServerFn(centerPointLatitude, centerPointLongitude) {
         var data = [
         {
             "id": 1,
@@ -403,6 +402,7 @@ var World = {
             "name": "Facultad de Ciencias Humanas"
         }];
 
+
        /* for (var i = 0; i < poisToCreate; i++) {
             poiData.push({
                 "id": (i + 1),
@@ -413,6 +413,25 @@ var World = {
                 "name": ("POI#" + (i + 1))
             });
         }*/
+		
+	requestFilterPlaces: function filterPlacesFn(centerPointLatitude,centerPointLongitude){
+		var data;
+		const xhttp = new XMLHttpRequest();
+		xhttp.open('GET', 'Filtrados.json', true); 
+		xhttp.send();
+		xhttp.onreadystatechange = function(){
+		if (this.readyState == 4 && this.status == 200){
+			let datosJson = JSON.parse(this.responseText);
+				data=getLugares(centerPointLatitude,centerPointLongitude, datosJson,  null);
+				World.loadPoisFromJsonData(data);
+				World.isRequestingData = false;
+			}
+		}
+	},
+	
+    requestDataFromServer: function requestDataFromServerFn(centerPointLatitude, centerPointLongitude) {
+        traerDatosJson();
+        var data = getLugares(centerPointLatitude, centerPointLongitude, null,  null);
         World.loadPoisFromJsonData(data);
         World.isRequestingData = false;
 
