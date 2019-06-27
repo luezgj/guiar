@@ -56,7 +56,6 @@ public class SimpleGeoArActivity extends SimpleArActivity implements LocationLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         locationProvider = new LocationProvider(this, this, errorCallback);
-        super.architectView.addArchitectJavaScriptInterfaceListener(((ArchitectJavaScriptInterfaceListener)(MainActivity.getSingletonActivity())));
     }
 
     @Override

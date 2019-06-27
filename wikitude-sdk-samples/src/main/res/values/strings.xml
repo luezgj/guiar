@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">GuiAr Guia</string>
+    <string name="app_name">GuiAr</string>
     <string name="menu_main_launch_url">Custom URL Launcher</string>
     <string name="menu_main_show_sdk_info">SDK Build Information</string>
 
@@ -66,4 +66,14 @@
     <string name="dialog_activate_gps">Debe activar el gps</string>
     <string name="cancel">Cancelar</string>
     <string name="activate">Activar</string>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="menu_navigation">Explorar</string>
+    <string name="menu_favorites">Favoritos</string>
+    <string name="menu_share_location">Compartí tu ubicación</string>
+    <string name="menu_add_site">Agregá tu sitio</string>
+    <string name="menu_our_group">Quiénes somos?</string>
 </resources>

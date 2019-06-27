@@ -2,6 +2,7 @@ package com.wikitude.samples.advanced;
 
 import com.wikitude.architect.ArchitectJavaScriptInterfaceListener;
 import com.wikitude.architect.ArchitectView;
+import com.wikitude.samples.MainActivity;
 import com.wikitude.sdksamples.R;
 
 import org.json.JSONException;
@@ -49,25 +50,7 @@ public class NativePoiDetailExtension extends ArchitectViewExtension implements 
      */
     @Override
     public void onJSONObjectReceived(JSONObject jsonObject) {
-        final Intent poiDetailIntent = new Intent(activity, SamplePoiDetailActivity.class);
-        try {
-            switch (jsonObject.getString("action")) {
-                case "present_poi_details":
-                    poiDetailIntent.putExtra(SamplePoiDetailActivity.EXTRAS_KEY_POI_ID, jsonObject.getString("id"));
-                    poiDetailIntent.putExtra(SamplePoiDetailActivity.EXTRAS_KEY_POI_TITILE, jsonObject.getString("title"));
-                    poiDetailIntent.putExtra(SamplePoiDetailActivity.EXTRAS_KEY_POI_DESCR, jsonObject.getString("description"));
-                    activity.startActivity(poiDetailIntent);
-                    break;
-            }
-
-        } catch (JSONException e) {
-            activity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(activity, R.string.error_parsing_json, Toast.LENGTH_LONG).show();
-                }
-            });
-            e.printStackTrace();
-        }
+        MainActivity mainActivity= MainActivity.getSingletonActivity();
+        mainActivity.onJSONObjectReceived(jsonObject);
     }
 }

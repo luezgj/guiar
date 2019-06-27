@@ -44,7 +44,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements ArchitectJavaScriptInterfaceListener {
     private static MainActivity singletonInstance;
 
-    public static Activity getSingletonActivity() {
+    public static MainActivity getSingletonActivity() {
         if (singletonInstance != null)
         {
             return singletonInstance;
@@ -256,5 +256,10 @@ public class MainActivity extends AppCompatActivity implements ArchitectJavaScri
         }
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    public void writeSome(){
+
+        Log.println(Log.ASSERT,"MainActivity", "Escribo algo");
     }
 }

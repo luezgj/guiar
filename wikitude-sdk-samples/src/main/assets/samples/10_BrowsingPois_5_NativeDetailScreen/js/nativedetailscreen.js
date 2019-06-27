@@ -455,7 +455,8 @@ var World = {
     },
 
     llamarGuia: function llamarGuia(){
-        AR.platform.sendJSONObject("{ id:1 }");
+        var objective= { id : 1 };
+        AR.platform.sendJSONObject(objective);
     }
 };
 

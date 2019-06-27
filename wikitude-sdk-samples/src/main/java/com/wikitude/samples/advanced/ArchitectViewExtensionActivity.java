@@ -1,6 +1,7 @@
 package com.wikitude.samples.advanced;
 
 import com.wikitude.architect.ArchitectView;
+import com.wikitude.samples.PrincipalArActivity;
 import com.wikitude.samples.SimpleArActivity;
 import com.wikitude.samples.advanced.plugins.FaceDetectionPluginExtension;
 import com.wikitude.samples.advanced.plugins.MarkerTrackingPluginExtension;
@@ -17,7 +18,7 @@ import android.support.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ArchitectViewExtensionActivity extends SimpleArActivity {
+public class ArchitectViewExtensionActivity extends PrincipalArActivity {
 
     private static final String EXTENSION_APPLICATION_MODEL_POIS = "application_model_pois";
     private static final String EXTENSION_GEO = "geo";
