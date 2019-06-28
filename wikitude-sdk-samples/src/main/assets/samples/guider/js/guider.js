@@ -7,15 +7,14 @@ var World = {
     // Create overlay for page one
     //this.imgOne: ,
 
-    overlayOne: new AR.ImageDrawable(new AR.ImageResource("assets/magazine_page_one.jpeg"), 1, {
-        translate: {
-            x: -0.15,
-        }
-    }),
+    overlayOne: new AR.ImageDrawable(new AR.ImageResource("assets/magazine_page_one.jpeg"), 5, {}),
+
+    puntoRojo: new AR.ImageDrawable(new AR.ImageResource("assets/point.png"), 4, {}),
 
 	//Distance considered far away to a point
 	FAR_AWAY_DISTANCE: 0.07,	//70mts
-	POINT_REACHED_THRESHOLD: 0.001,		//1mt
+	POINT_REACHED_THRESHOLD: 0.005,		//5mts
+    POINTS_DISTANCE: 0.025,
 
 	/* List of corners that form the path */
 	cornerPath: [],
@@ -160,8 +159,12 @@ var World = {
                         if (World.currentObjetive==World.cornerPath.length-1){
                             World.lastObjective=true;
                         }
+                        var desde=currentLocation;
                         AR.logger.debug("cantidad de esquinas: "+World.cornerPath.length);
-                        World.makePointsPath(currentLocation,World.cornerPath[World.currentObjetive]);     //calcular camino hasta objetivo
+                        //for(var i=0;i<World.cornerPath.length;i++){
+                            World.makePointsPath(currentLocation,World.cornerPath[World.currentObjetive]);     //calcular camino hasta objetivo
+                        //    desde=World.cornerPath[i];
+                        //}
                         World.drawPath();
                     }else{
                         AR.logger.debug("Hay objetivo");
@@ -172,7 +175,7 @@ var World = {
                         //}else {
                             if(World.nextPointReached(currentLocation)){ //llegaste al siguiente punto
                                 World.ereaseNextPoint();
-                                if ((World.pointsPath.length<=3) && (!World.lastObjective)){    //Es el final del tramo
+                                if ((World.pointsPath.length<=1) && (!World.lastObjective)){    //Es el final del tramo
                                     console.log("Hay que hacer un nuevo tramo");
                                     World.makePointsPath(World.cornerPath[World.currentObjetive],World.cornerPath[World.currentObjetive+1]);    //calcular camino hasta objetivo
                                     World.nextObjetive();
@@ -240,6 +243,7 @@ var World = {
 	        steps.forEach(step => {
 	            var esquinas= step.intersections
 	            esquinas.forEach ( esquina =>{
+                    AR.logger.debug("Esquina:"+esquina.location[1]+";"+esquina.location[0]);
 	                World.cornerPath.push(new GeoPoint(esquina.location[1],esquina.location[0],null));
 	             })
 	        });
@@ -261,14 +265,17 @@ var World = {
         AR.logger.debug("MakePoints llamado");
         var pointsAmount = origen.getKilometros(destino);
         console.log("Distancia al siguiente punto"+ pointsAmount);
-		pointsAmount=Math.trunc(pointsAmount/0.005);  //Un punto cada cinco metros
-        console.log("Cantidad de puntos:"+ pointsAmount);
+		pointsAmount=Math.trunc(pointsAmount/World.POINTS_DISTANCE);  //Un punto cada cinco metros
+        if(pointsAmount==0){
+            pointsAmount=1;
+        }
+        AR.logger.debug("Cantidad de puntos:"+ pointsAmount);
 
-	    var latStep=(origen.lat-destino.lat)/pointsAmount;
+	    var latStep=(destino.lat-origen.lat)/pointsAmount;
         console.log("latStep:"+ latStep);
-	    var lonStep=(origen.long-destino.long)/pointsAmount;
+	    var lonStep=(destino.long-origen.long)/pointsAmount;
         console.log("lonStep:"+ lonStep);
-	    var altStep=(origen.alt-destino.alt)/pointsAmount;
+	    var altStep=(destino.alt-origen.alt)/pointsAmount;
         console.log("altStep:"+ altStep);
 
 	    var pointLat=origen.lat;
@@ -288,14 +295,25 @@ var World = {
 
 
 	drawPath: function drawPathFn () {
-        AR.logger.debug("Draw llamado");
+        AR.logger.debug("Dibujo puntos intermedios");
 		World.pointsPathDraws.length=0;
 		for (var i = 0; i < World.pointsPath.length; i++) {
             console.log("Point of path:");
             console.log(World.pointsPath[i]);
-			World.pointsPathDraws.push(new PointOfPath(World.pointsPath[i]));
+            AR.logger.debug("Puntito:"+World.pointsPath[i].lat+";"+World.pointsPath[i].long);
+			World.pointsPathDraws.push(new RedPoint(World.pointsPath[i]));
             AR.logger.debug("Punto mostrado");
 		}
+
+        /*
+        AR.logger.debug("Dibujo esquinas");
+        AR.logger.debug("Cantidad de esquinas en el arreglo:"+World.cornerPath.length);
+        for (var i = 0; i < World.cornerPath.length; i++) {
+            AR.logger.debug("Esquina dibujada:"+World.cornerPath[i].lat+";"+World.cornerPath[i].long);
+            new PointOfPath(World.cornerPath[i]);
+            AR.logger.debug("Esquina mostrada");
+        }
+        */
 	},
 
 	ereaseNextPoint: function ereaseNextPointFn() {

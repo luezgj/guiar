@@ -43,9 +43,6 @@ function Marker(place) {
     /* Create an AR.Label for the marker's title . */
     this.titleLabel = new AR.Label(place.name.trunc(10), 1, {
         zOrder: 1,
-        translate: {
-            y: 0.55
-        },
         style: {
             textColor: '#FFFFFF',
             fontStyle: AR.CONST.FONT_STYLE.BOLD
@@ -54,9 +51,6 @@ function Marker(place) {
 
     this.descriptionLabel = new AR.Label(place.description.trunc(15), 0.8, {
         zOrder: 1,
-        translate: {
-            y: -0.55
-        },
         style: {
             textColor: '#FFFFFF'
         }

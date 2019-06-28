@@ -9,6 +9,7 @@ import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -55,7 +56,11 @@ public class SimpleGeoArActivity extends SimpleArActivity implements LocationLis
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.println(Log.ASSERT,"SimpleGeoAr","Creando");
         locationProvider = new LocationProvider(this, this, errorCallback);
+        Log.println(Log.ASSERT,"SimpleGeoAr","LocationProviderCreado");
+        int placeId=getIntent().getIntExtra(GuiderActivity.INTENT_EXTRAS_KEY_TARGETID,0);
+        architectView.callJavascript("World.setTarget("+placeId+")");
     }
 
     @Override

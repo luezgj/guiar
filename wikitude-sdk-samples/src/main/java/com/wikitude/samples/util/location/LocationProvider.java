@@ -53,7 +53,7 @@ public class LocationProvider {
 
 	public static class ActivateGPSDialogFragment extends DialogFragment {
 
-		public Dialog onCreateDialog(Bundle savedInstanceState, final LocationProvider provider) {
+		/*public Dialog onCreateDialog(Bundle savedInstanceState, final LocationProvider provider) {
 			// Use the Builder class for convenient dialog construction
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			builder.setMessage("Estoy usando Google Play Service de localización")
@@ -68,7 +68,7 @@ public class LocationProvider {
 					});
 			// Create the AlertDialog object and return it
 			return builder.create();
-		}
+		}*/
 	}
 
 	private Context context;
@@ -107,9 +107,6 @@ public class LocationProvider {
 		this.context = context;
 		this.locationListener = locationListener;
 		this.callback = callback;
-
-		ActivateGPSDialogFragment dialog = new ActivateGPSDialogFragment();
-		dialog.onCreateDialog(null, this).show();
 
 		locationCallback = new LocationCallback() {
 			@Override
@@ -170,7 +167,9 @@ public class LocationProvider {
 					} catch (IntentSender.SendIntentException sendEx) {
 						// Ignore the error.
 					}
-				}
+				} else {
+                    callback.noProvidersEnabled();
+                }
 			}
 		});
 

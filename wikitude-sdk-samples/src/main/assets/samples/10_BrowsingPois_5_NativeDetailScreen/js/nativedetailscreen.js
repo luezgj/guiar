@@ -65,6 +65,7 @@ var World = {
 
         /* Loop through POI-information and create an AR.GeoObject (=Marker) per POI. */
         for (var currentPlaceNr = 0; currentPlaceNr < placesArray.length; currentPlaceNr++) {
+            AR.logger.debug(placesArray[currentPlaceNr].name+":"+placesArray[currentPlaceNr].geopoint.lat+";"+placesArray[currentPlaceNr].geopoint.long);
             World.markerList.push(new Marker(placesArray[currentPlaceNr]));
         }
 
@@ -109,13 +110,16 @@ var World = {
     /* User clicked "More" button in POI-detail panel -> fire event to open native screen. */
     onPoiDetailGuideClicked: function onPoiDetailGuideClickedFn() {
         var currentMarker = World.currentMarker;
+        AR.logger.debug();
         var objective= { id : currentMarker.place.id };
         AR.platform.sendJSONObject(objective);
     },
 
     /* Location updates, fired every time you call architectView.setLocation() in native environment. */
     locationChanged: function locationChangedFn(lat, lon, alt, acc) {
-        console.log("locationChanged");
+        AR.logger.debug("locationChanged:"+lat+";"+lon);
+        AR.logger.debug("accuracy:"+acc);
+
         /* Store user's current location in World.userLocation, so you always know where user is. */
         World.userLocation = {
             'latitude': lat,
@@ -417,6 +421,11 @@ var World = {
     onError: function onErrorFn(error) {
         alert(error);
     },
+
+    llamarGuia: function llamarGuiaFn(){
+        var obj= { id : 6 };
+        AR.platform.sendJSONObject(obj);
+    }
 };
 
 

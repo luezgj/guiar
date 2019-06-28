@@ -98,6 +98,7 @@ public class SimpleArActivity extends AppCompatActivity {
         config.setCamera2Enabled(sampleData.isCamera2Enabled());        // The camera2 api is disabled by default (old camera api is used).
         
         architectView = new ArchitectView(this);
+        Log.println(Log.ASSERT,"SimpleAr","architectView creado");
         architectView.onCreate(config); // create ArchitectView with configuration
 
         setContentView(architectView);

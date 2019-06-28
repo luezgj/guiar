@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -78,13 +79,13 @@ public class SampleJsonParser {
 
                     if (extensions != null) {
                         activityClass = ArchitectViewExtensionActivity.class;
-                    } else if (features.contains("guider")) {
-                        activityClass = SimpleGeoArActivity.class;
                     } else if (features.contains(Feature.GEO)) {
                         activityClass = SimpleGeoArActivity.class;
                     }else {
                         activityClass = SimpleArActivity.class;
                     }
+                    Log.println(Log.ASSERT,"JsonParser","Clase de la activity: "+activityClass.getSimpleName());
+
 
                     final SampleData data = new SampleData.Builder(name, path)
                             .activityClass(activityClass)

@@ -9,6 +9,7 @@ import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 public class GeoExtension extends ArchitectViewExtension implements LocationListener {
@@ -84,6 +85,7 @@ public class GeoExtension extends ArchitectViewExtension implements LocationList
      */
     @Override
     public void onLocationChanged(Location location) {
+        Log.println(Log.ASSERT,"GeoExtension","Accuracy:"+location.getAccuracy());
         float accuracy = location.hasAccuracy() ? location.getAccuracy() : 1000;
         if (location.hasAltitude()) {
             architectView.setLocation(location.getLatitude(), location.getLongitude(), location.getAltitude(), accuracy);

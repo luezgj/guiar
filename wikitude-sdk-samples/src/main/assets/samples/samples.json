@@ -23,13 +23,10 @@
         "category_name": "Guider",
         "samples": [
             {
-                "required_extensions": [
-                    "geo"
-                ],
                 "name": "Guider",
                 "path": "guider/index.html",
                 "requiredFeatures": [
-                    "guider"
+                    "geo"
                 ],
                 "startupConfiguration": {
                     "camera_position": "back",
