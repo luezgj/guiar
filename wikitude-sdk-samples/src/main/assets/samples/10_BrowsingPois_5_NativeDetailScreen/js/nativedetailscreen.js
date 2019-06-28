@@ -39,7 +39,7 @@ var World = {
     updatePlacemarkDistancesEveryXLocationUpdates: 10,
 
     /* Called to inject new POI data. */
-    loadPoisFromJsonData: function loadPoisFromJsonDataFn(poiData) {
+    loadPoisFromPlacesArray: function loadPoisFromPlacesArrayFn(placesArray) {
 
         /* Destroys all existing AR-Objects (markers & radar). */
         AR.context.destroyAll();
@@ -64,17 +64,8 @@ var World = {
         });
 
         /* Loop through POI-information and create an AR.GeoObject (=Marker) per POI. */
-        for (var currentPlaceNr = 0; currentPlaceNr < poiData.length; currentPlaceNr++) {
-            var singlePoi = {
-                "id": poiData[currentPlaceNr].id,
-                "latitude": parseFloat(poiData[currentPlaceNr].latitude),
-                "longitude": parseFloat(poiData[currentPlaceNr].longitude),
-                "altitude": parseFloat(poiData[currentPlaceNr].altitude),
-                "title": poiData[currentPlaceNr].name,
-                "description": poiData[currentPlaceNr].description
-            };
-
-            World.markerList.push(new Marker(singlePoi));
+        for (var currentPlaceNr = 0; currentPlaceNr < placesArray.length; currentPlaceNr++) {
+            World.markerList.push(new Marker(placesArray[currentPlaceNr]));
         }
 
         /* Updates distance information of all placemarks. */
@@ -116,23 +107,15 @@ var World = {
         This demoes the interaction between JavaScript and native code.
     */
     /* User clicked "More" button in POI-detail panel -> fire event to open native screen. */
-    onPoiDetailMoreButtonClicked: function onPoiDetailMoreButtonClickedFn() {
+    onPoiDetailGuideClicked: function onPoiDetailGuideClickedFn() {
         var currentMarker = World.currentMarker;
-        var markerSelectedJSON = {
-            action: "present_poi_details",
-            id: currentMarker.poiData.id,
-            title: currentMarker.poiData.title,
-            description: currentMarker.poiData.description
-        };
-        /*
-            The sendJSONObject method can be used to send data from javascript to the native code.
-        */
-        AR.platform.sendJSONObject(markerSelectedJSON);
+        var objective= { id : currentMarker.place.id };
+        AR.platform.sendJSONObject(objective);
     },
 
     /* Location updates, fired every time you call architectView.setLocation() in native environment. */
     locationChanged: function locationChangedFn(lat, lon, alt, acc) {
-
+        console.log("locationChanged");
         /* Store user's current location in World.userLocation, so you always know where user is. */
         World.userLocation = {
             'latitude': lat,
@@ -174,8 +157,9 @@ var World = {
             description), compare index.html in the sample's directory.
         */
         /* Update panel values. */
-        $("#poi-detail-title").html(marker.poiData.title);
-        $("#poi-detail-description").html(marker.poiData.description);
+        $("#poi-detail-title").html(marker.place.name);
+        $("#poi-detail-description").html(marker.place.description);
+        $("#poi-detail-category").html(marker.place.category);
 
 
         /*
@@ -334,31 +318,6 @@ var World = {
     },
 
     /* Request POI data. */
-    requestDataFromServerAnt: function requestDataFromServerFn(lat, lon) {
-
-        /* Set helper var to avoid requesting places while loading. */
-        World.isRequestingData = true;
-        World.updateStatusMessage('Requesting places from web-service');
-
-        /* Server-url to JSON content provider. */
-        var serverUrl = ServerInformation.POIDATA_SERVER + "?" + ServerInformation.POIDATA_SERVER_ARG_LAT + "=" +
-            lat + "&" + ServerInformation.POIDATA_SERVER_ARG_LON + "=" +
-            lon + "&" + ServerInformation.POIDATA_SERVER_ARG_NR_POIS + "=20";
-
-
-        var jqxhr = $.getJSON(serverUrl, function(data) {
-
-                World.loadPoisFromJsonData(data);
-            })
-            .error(function(err) {
-                World.updateStatusMessage("Invalid web-service response.", true);
-                World.isRequestingData = false;
-            })
-            .complete(function() {
-                World.isRequestingData = false;
-            });
-    },
-    /* Request POI data. */
     /*requestDataFromServer: function requestDataFromServerFn(centerPointLatitude, centerPointLongitude) {
         var data = [
         {
@@ -414,6 +373,8 @@ var World = {
             });
         }*/
 		
+
+    /*La función que hizo Ema    
 	requestFilterPlaces: function filterPlacesFn(centerPointLatitude,centerPointLongitude){
 		var data;
 		const xhttp = new XMLHttpRequest();
@@ -423,20 +384,23 @@ var World = {
 		if (this.readyState == 4 && this.status == 200){
 			let datosJson = JSON.parse(this.responseText);
 				data=getLugares(centerPointLatitude,centerPointLongitude, datosJson,  null);
-				World.loadPoisFromJsonData(data);
+				World.loadPoisFromPlacesArray(data);
 				World.isRequestingData = false;
 			}
 		}
 	},
+    */
 	
     requestDataFromServer: function requestDataFromServerFn(centerPointLatitude, centerPointLongitude) {
-        traerDatosJson();
-        var data = getLugares(centerPointLatitude, centerPointLongitude, null,  null);
-        console.log("Lugares traidos del servidor:");
-        console.log(data);
-        World.loadPoisFromJsonData(data);
-        World.isRequestingData = false;
+        function requestDataAfterLoad(){
+            var data = getLugares(new GeoPoint(centerPointLatitude, centerPointLongitude, null), ["Cerveceria","Cafeteria","Restaurant","Turistico"]/*Traer todos los tipos de lugares*/,  10/*Traer lugares hasta 10km*/);
+            console.log("Lugares traidos del servidor:");
+            console.log(data);
+            World.loadPoisFromPlacesArray(data);
+            World.isRequestingData = false;
+        }
 
+        traerDatosJson(requestDataAfterLoad);
     },
 
 
@@ -453,11 +417,6 @@ var World = {
     onError: function onErrorFn(error) {
         alert(error);
     },
-
-    llamarGuia: function llamarGuia(){
-        var objective= { id : 1 };
-        AR.platform.sendJSONObject(objective);
-    }
 };
 
 

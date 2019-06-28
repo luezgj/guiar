@@ -1,5 +1,8 @@
 package com.wikitude.samples;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.wikitude.architect.ArchitectView;
 import com.wikitude.common.CallStatus;
 import com.wikitude.common.permission.PermissionManager;
@@ -66,6 +69,12 @@ public class MainActivity extends AppCompatActivity implements ArchitectJavaScri
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        int serviceAvailable = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(getApplicationContext());
+        if (serviceAvailable!= ConnectionResult.SUCCESS){
+            GoogleApiAvailability.getInstance().getErrorDialog(this,serviceAvailable,0).show();
+        }
+
         setContentView(R.layout.activity_main);
 
         singletonInstance=this;

@@ -1,9 +1,9 @@
 class Place {
-    constructor(id, name, description, categories, contact, schedule , geopoint) {
+    constructor(id, name, description, category, contact, schedule , geopoint) {
         this._id = id;
         this._name = name;
         this._description = description;
-        this._categories = categories;
+        this._category = category;
 
         this._contact = contact;
 		this._schedule = schedule;
@@ -23,8 +23,8 @@ class Place {
         return this._description;
     }
 
-    get categories(){
-        return this._categories;
+    get category(){
+        return this._category;
     }
 
     get contact(){

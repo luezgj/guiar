@@ -6,17 +6,16 @@ function PointOfPath(geolocation) {
         defined for multiple targets. A target can be the camera, the radar or a direction indicator. Both the
         radar and direction indicators will be covered in more detail in later examples.
     */
-
-    var markerLocation;
+    this.markerLocation;
     /* Create the AR.GeoLocation from the poi data. */
-    if (geolocation.alt==null){
-        markerLocation= new AR.GeoLocation(geolocation.lat, geolocation.long);
+    if (geolocation.alt==null || geolocation.alt==0){
+        this.markerLocation= new AR.GeoLocation(geolocation.lat, geolocation.long);
     }else{
-        markerLocation= new AR.GeoLocation(geolocation.lat, geolocation.long, geolocation.alt);
+        this.markerLocation= new AR.GeoLocation(geolocation.lat, geolocation.long, geolocation.alt);
     }
 
     /* Create the AR.GeoObject with the drawable objects. */
-    this.markerObject = new AR.GeoObject(markerLocation, {
+    this.markerObject = new AR.GeoObject(this.markerLocation, {
         drawables: {
             cam: World.overlayOne
         }
@@ -26,6 +25,9 @@ function PointOfPath(geolocation) {
 }
 
 
-PointOfPath.prototype.remove = function(marker) {
-    marker.markerObject.destroy();
+PointOfPath.prototype.remove = function(point) {
+    console.log(point);
+    console.log(point.markerObject);
+    point.markerLocation.destroy();
+    point.markerObject.destroy();
 };

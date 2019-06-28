@@ -17,7 +17,7 @@ function Marker(place) {
     this.animationGroupSelected = null;
 
     /* Create the AR.GeoLocation from the poi data. */
-    var markerLocation = new AR.GeoLocation(place.geopoint.latitude, place.geopoint.longitude, place.geopoint.altitude);
+    var markerLocation = new AR.GeoLocation(place.geopoint.lat, place.geopoint.long, place.geopoint.alt);
 
     /* Create an AR.ImageDrawable for the marker in idle state. */
     this.markerDrawableIdle = new AR.ImageDrawable(World.markerDrawableIdle, 2.5, {

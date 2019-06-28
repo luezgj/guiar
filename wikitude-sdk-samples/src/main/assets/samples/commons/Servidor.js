@@ -1,47 +1,52 @@
 var listOfLugares = [];
 
-function traerDatosJson(){ // LEVANTA EL ARCHIVO JSON Y LO GUARDA EN LISTOFLUGARES
+function traerDatosJson(callback){ // LEVANTA EL ARCHIVO JSON Y LO GUARDA EN LISTOFLUGARES
     const xhttp = new XMLHttpRequest();
-    console.log("traerDatosJson llamado");
     xhttp.open('GET', 'Lugares.json', true);
 
     xhttp.send();
 
     xhttp.onreadystatechange = function(responseText){
-        console.log("Pedido cumplido");
-        console.log(responseText);
-        console.log(xhttp);
         if (this.readyState == 4 && this.status == 200){
-            console.log("datos parseado?");
             let datos = JSON.parse(this.responseText);
-            console.log("datos parseado");
             for (var input of datos){
-                console.log("Un dato:");
                 var sitio = new Place(input.id, input.name, input.description, input.category, new Contact(), new Schedule(), new GeoPoint(input.lat, input.long));
-                console.log(sitio);
                 listOfLugares.push(sitio);
+                console.log("cargué un lugar");
+            }
+            if (callback!=null){
+                console.log("llamo al callback");
+                callback();
             }
         }
     }
 }
 
-var pertenece = function(categorias, categories){
+var pertenece = function(categorias, category){
     for (var item of categorias)
-        for (var item2 of categories)
-            if (item === item2)
-                return true;
+        if (item === category){
+            console.log(item+";"+category);
+            return true;
+        }
     return false;
 }
 
 function getLugares(myPlace, categorias, maxKm){
     var listofSites = [];
-
     for (var item of listOfLugares){
         var distancia = item.geopoint.getKilometros(myPlace);
-        if (pertenece(categorias, item.categories) && (distancia < maxKm))
+        if (pertenece(categorias, item.category) && (distancia < maxKm))
             listofSites.push(item);
     }
     return listofSites;
+}
+
+function getPlace(placeId){
+    console.log("placeId:"+placeId+"; CantidadLugares"+listOfLugares.length);
+    if (placeId<listOfLugares.length){
+        console.log(listOfLugares[placeId]);
+        return listOfLugares[placeId];
+    }
 }
 
 function getSitios(){

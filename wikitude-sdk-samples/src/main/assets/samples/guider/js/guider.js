@@ -13,7 +13,6 @@ var World = {
         }
     }),
 
-
 	//Distance considered far away to a point
 	FAR_AWAY_DISTANCE: 0.07,	//70mts
 	POINT_REACHED_THRESHOLD: 0.001,		//1mt
@@ -25,11 +24,7 @@ var World = {
 	currentObjetive: null,
 
 	/* destination of the path */
-	objective: new GeoPoint(-37.318337,-59.121612,null),
-
-
-    // -37.318337,-59.121612,  Casa de Joaco
-    // -37.320751,-59.125902  Mi casa
+	objective: null,
 
     /* True once path was fetched. */
     loadedPath: false,
@@ -43,16 +38,29 @@ var World = {
     pointsPath: [],
     pointsPathDraws: [],
 
+    lastKnowedLocation: null,
 
     setTarget: function setTargetFn(targetId){
+        function getPlaceAfterLoad(){
+            World.objective= getPlace(targetId);
+            if (World.lastKnowedLocation!=null){
+                if(World.lastKnowedLocation.alt!=null){
+                    World.locationChanged(World.lastKnowedLocation.lat,World.lastKnowedLocation.long,World.lastKnowedLocation.alt,null);
+                }else{
+                    World.locationChanged(World.lastKnowedLocation.lat,World.lastKnowedLocation.long,null);
+                }
+            }
+        };
 
+        traerDatosJson(getPlaceAfterLoad);
+        
     },
 
         /* Location updates, fired every time you call architectView.setLocation() in native environment. */
     locationChanged: function locationChangedFn(lat, lon, alt, acc) {
         AR.logger.debug("Location changed con altitud");
     	var currentLocation=new GeoPoint(lat,lon,alt);
-
+        World.lastKnowedLocation=currentLocation;
 
         /*
     	if (es la primera vez || estás muy lejos del objetivo)
@@ -111,9 +119,13 @@ var World = {
     },
 
     locationChanged: function locationChangedFn(lat, lon, acc) {
+        
+        AR.logger.debug("Location changed with accuracy:"+acc);
+        var currentLocation=new GeoPoint(lat,lon,null);
+        World.lastKnowedLocation=currentLocation;
+        
         if (World.objective!=null){
-            AR.logger.debug("Location changed");
-            var currentLocation=new GeoPoint(lat,lon,null);
+
             /*
             if (es la primera vez || estás muy lejos del objetivo)
                 cargar el camino
@@ -148,8 +160,7 @@ var World = {
                         if (World.currentObjetive==World.cornerPath.length-1){
                             World.lastObjective=true;
                         }
-                        console.log("index: "+World.currentObjetive);
-                        console.log("cantidad de esquinas: "+World.cornerPath.length);
+                        AR.logger.debug("cantidad de esquinas: "+World.cornerPath.length);
                         World.makePointsPath(currentLocation,World.cornerPath[World.currentObjetive]);     //calcular camino hasta objetivo
                         World.drawPath();
                     }else{
@@ -161,7 +172,7 @@ var World = {
                         //}else {
                             if(World.nextPointReached(currentLocation)){ //llegaste al siguiente punto
                                 World.ereaseNextPoint();
-                                if (World.pointsPath.length<=3 && !World.lastObjective){    //Es el final del tramo
+                                if ((World.pointsPath.length<=3) && (!World.lastObjective)){    //Es el final del tramo
                                     console.log("Hay que hacer un nuevo tramo");
                                     World.makePointsPath(World.cornerPath[World.currentObjetive],World.cornerPath[World.currentObjetive+1]);    //calcular camino hasta objetivo
                                     World.nextObjetive();
@@ -203,9 +214,10 @@ var World = {
     		return false;
     	}else{
     		if(World.pointsPath[0].getKilometros(location)<World.POINT_REACHED_THRESHOLD){  //if user are in the point
-    			console.log("next point reached");
+    			AR.logger.debug("next point reached");
                 return true;
     		}else{
+                AR.logger.debug("todavía no llegás");
     			return false;
     		}
     	}
@@ -216,7 +228,7 @@ var World = {
 	    var request = new XMLHttpRequest();
         AR.logger.debug("Origen:"+from.toString());
         AR.logger.debug("Destino:"+World.objective.toString());
-	    var url = 'https://api.mapbox.com/directions/v5/mapbox/walking/' + from.toString() + ';' + World.objective.toString() + '.json?access_token=pk.eyJ1IjoibGFyZGEiLCJhIjoiY2p2enlpeng0MDVqNTQ5bGtmcXVoOGFvYyJ9.BV8qWVhxm6i2QW2LSNcUUg&steps=true&alternatives=true&overview=full&geometries=polyline';
+	    var url = 'https://api.mapbox.com/directions/v5/mapbox/walking/' + from.toString() + ';' + World.objective.geopoint.toString() + '.json?access_token=pk.eyJ1IjoibGFyZGEiLCJhIjoiY2p2enlpeng0MDVqNTQ5bGtmcXVoOGFvYyJ9.BV8qWVhxm6i2QW2LSNcUUg&steps=true&alternatives=true&overview=full&geometries=polyline';
 	    request.open('GET',url,true);
 	    World.cornerPath.length=0;
 	    request.onload = function () {
@@ -289,7 +301,11 @@ var World = {
 	ereaseNextPoint: function ereaseNextPointFn() {
     	World.pointsPath.shift(); 
     	PointOfPath.prototype.remove(World.pointsPathDraws[0]);
-    	World.pointsPath.shift(); 
+    	World.pointsPathDraws.shift(); 
+    },
+
+    setTargetJoaco: function setTargetJoacoFn(){
+        World.setTarget(6);
     },
 
 };
