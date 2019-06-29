@@ -10,7 +10,7 @@ function traerDatosJson(callback){ // LEVANTA EL ARCHIVO JSON Y LO GUARDA EN LIS
         if (this.readyState == 4 && this.status == 200){
             let datos = JSON.parse(this.responseText);
             for (var input of datos){
-                var sitio = new Place(input.id, input.name, input.description, input.category, new Contact(), new Schedule(), new GeoPoint(input.lat, input.long));
+                var sitio = new Place(input.id, input.name, input.description, input.category, new Contact(), new Schedule(), new GeoPoint(input.lat, input.long),input.imgsrc );
                 listOfLugares.push(sitio);
                 console.log("cargué un lugar");
             }

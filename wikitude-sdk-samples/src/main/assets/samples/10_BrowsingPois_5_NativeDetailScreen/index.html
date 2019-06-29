@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="application/json; charset=utf-8">
     <meta content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes" name="viewport">
 
-    <title>My ARchitect World</title>
+    <title>Tandil</title>
 
     <script src="https://www.wikitude.com/libs/architect.js"></script>
     <script src="../ade.js"></script>
@@ -74,9 +74,12 @@
          style="background-color:#F0F0F0;" data-theme="c">
 
         <!-- header with "close" button -->
-        <div data-role="header" data-theme="c">
-            <h1>Details</h1>
-            <a href="#header" data-rel="close">Close</a>
+        <div>
+            <img src="img/whatsapp.png" width="30" height="30">
+            <img src="img/facebook.png" width="30" height="30">
+            <img src="img/instagram.png" width="30" height="30">
+            <img src="img/twitter.png" width="30" height="30">
+            <img src="img/email.png" width="30" height="30">
         </div>
 
         <!-- content of POI detail page, you may also add thumbnails etc. here if you like -->
@@ -85,6 +88,8 @@
             <!-- title -->
             <h3 id="poi-detail-title"></h3>
 
+            <!-- img -->
+            <img src="" id="poi-img" width="100" height="100">
             <!-- description -->
             <h4 id="poi-detail-category"></h4>
 
@@ -92,7 +97,7 @@
             <h4 id="poi-detail-description"></h4>
 
             <!-- distance -->
-            <h4>Distance: <a id="poi-detail-distance"></a></h4>
+            <h4>Distancia: <a id="poi-detail-distance"></a></h4>
 
             <!-- more button-->
             <a href="javascript: World.onPoiDetailGuideClicked();" data-role="button" data-icon="arrow-r"
@@ -106,7 +111,7 @@
 
         <!-- header with close button -->
         <div data-role="header" data-theme="c">
-            <h1>Range</h1>
+            <h1>Rango</h1>
             <a href="#header" data-rel="close">Close</a>
         </div>
 
@@ -114,7 +119,7 @@
         <div data-role="content">
 
             <!-- Range in m/km-->
-            <h4> Range: <a id="panel-distance-value"></a></h4>
+            <h4> Rango: <a id="panel-distance-value"></a></h4>
 
             <!-- Amount of visible places -->
             <h4> Visible: <a id="panel-distance-places"></a></h4>

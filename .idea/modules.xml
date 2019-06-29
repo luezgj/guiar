@@ -4,8 +4,13 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Guiar.iml" filepath="$PROJECT_DIR$/Guiar.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/guiar.iml" filepath="$PROJECT_DIR$/.idea/guiar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/plugins/plugins.iml" filepath="$PROJECT_DIR$/plugins/plugins.iml" />
       <module fileurl="file://$PROJECT_DIR$/plugins/plugins.iml" filepath="$PROJECT_DIR$/plugins/plugins.iml" />
       <module fileurl="file://$PROJECT_DIR$/wikitude-sdk/wikitude-sdk.iml" filepath="$PROJECT_DIR$/wikitude-sdk/wikitude-sdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wikitude-sdk/wikitude-sdk.iml" filepath="$PROJECT_DIR$/wikitude-sdk/wikitude-sdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wikitude-sdk-samples/wikitude-sdk-samples.iml" filepath="$PROJECT_DIR$/wikitude-sdk-samples/wikitude-sdk-samples.iml" />
       <module fileurl="file://$PROJECT_DIR$/wikitude-sdk-samples/wikitude-sdk-samples.iml" filepath="$PROJECT_DIR$/wikitude-sdk-samples/wikitude-sdk-samples.iml" />
     </modules>
   </component>

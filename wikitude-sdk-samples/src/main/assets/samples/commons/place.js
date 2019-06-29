@@ -1,5 +1,5 @@
 class Place {
-    constructor(id, name, description, category, contact, schedule , geopoint) {
+    constructor(id, name, description, category, contact, schedule , geopoint, imgsrc) {
         this._id = id;
         this._name = name;
         this._description = description;
@@ -9,6 +9,7 @@ class Place {
 		this._schedule = schedule;
 
 		this._geopoint = geopoint;
+		this._imgsrc= imgsrc;
     }
 
     get id(){
@@ -37,5 +38,9 @@ class Place {
 
     get geopoint(){
         return this._geopoint;
+    }
+
+    get imgsrc(){
+            return this._imgsrc;
     }
 }

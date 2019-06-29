@@ -164,7 +164,7 @@ var World = {
         $("#poi-detail-title").html(marker.place.name);
         $("#poi-detail-description").html(marker.place.description);
         $("#poi-detail-category").html(marker.place.category);
-
+        $("#poi-img").attr("src",marker.place.imgsrc)
 
         /*
             It's ok for AR.Location subclass objects to return a distance of `undefined`. In case such a distance
