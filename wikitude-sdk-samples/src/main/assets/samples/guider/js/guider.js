@@ -89,7 +89,7 @@ var World = {
         
             if (!World.loadingPath){
                 if(World.currentObjetive==null){   // Si todavía no se comenzó a dibujar el camino
-                	World.currentObjetive= 0;
+                	World.currentObjetive= 1;
                     if (World.currentObjetive==World.cornerPath.length-1){
                         World.lastObjective=true;
                     }
@@ -155,7 +155,7 @@ var World = {
                     AR.logger.debug("Not loading path");
                     if(World.currentObjetive==null){   // Si todavía no se comenzó a dibujar el camino
                         AR.logger.debug("Objective null");
-                        World.currentObjetive= 0;
+                        World.currentObjetive= 1;
                         if (World.currentObjetive==World.cornerPath.length-1){
                             World.lastObjective=true;
                         }

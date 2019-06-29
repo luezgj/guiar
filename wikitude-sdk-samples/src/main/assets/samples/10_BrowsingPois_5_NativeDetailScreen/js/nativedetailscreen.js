@@ -45,7 +45,7 @@ var World = {
         AR.context.destroyAll();
 
         /* Show radar & set click-listener. */
-        PoiRadar.show();
+        //PoiRadar.show();
         $('#radarContainer').unbind('click');
         $("#radarContainer").click(PoiRadar.clickedRadar);
 
@@ -53,12 +53,34 @@ var World = {
         World.markerList = [];
 
         /* Start loading marker assets. */
-        World.markerDrawableIdle = new AR.ImageResource("assets/location1.png", {
+        World.markerTuristicoDrawableIdle = new AR.ImageResource("assets/locationTuristico.png", {
             onError: World.onError
         });
-        World.markerDrawableSelected = new AR.ImageResource("assets/location2.png", {
+        World.markerTuristicoDrawableSelected = new AR.ImageResource("assets/locationTuristicoSelected.png", {
             onError: World.onError
         });
+
+        World.markerRestauranteDrawableIdle = new AR.ImageResource("assets/locationRestaurante.png", {
+            onError: World.onError
+        });
+        World.markerRestauranteDrawableSelected = new AR.ImageResource("assets/locationRestauranteSelected.png", {
+            onError: World.onError
+        });
+
+        World.markerCafeteriaDrawableIdle = new AR.ImageResource("assets/locationCafeteria.png", {
+            onError: World.onError
+        });
+        World.markerCafeteriaDrawableSelected = new AR.ImageResource("assets/locationCafeteriaSelected.png", {
+            onError: World.onError
+        });
+
+        World.markerBarDrawableIdle = new AR.ImageResource("assets/locationBar.png", {
+            onError: World.onError
+        });
+        World.markerBarDrawableSelected = new AR.ImageResource("assets/locationBarSelected.png", {
+            onError: World.onError
+        });
+
         World.markerDrawableDirectionIndicator = new AR.ImageResource("assets/indi.png", {
             onError: World.onError
         });
@@ -66,7 +88,12 @@ var World = {
         /* Loop through POI-information and create an AR.GeoObject (=Marker) per POI. */
         for (var currentPlaceNr = 0; currentPlaceNr < placesArray.length; currentPlaceNr++) {
             AR.logger.debug(placesArray[currentPlaceNr].name+":"+placesArray[currentPlaceNr].geopoint.lat+";"+placesArray[currentPlaceNr].geopoint.long);
-            World.markerList.push(new Marker(placesArray[currentPlaceNr]));
+            let currentMarker=new Marker(placesArray[currentPlaceNr]);
+            console.log(currentMarker);
+            World.markerList.push(currentMarker);
+            if (currentMarker.markerObject.locations[0].distanceToUser()>500){
+                currentMarker.markerObject.enabled=false;
+            }
         }
 
         /* Updates distance information of all placemarks. */
@@ -378,22 +405,16 @@ var World = {
         }*/
 		
 
-    /*La función que hizo Ema    
-	requestFilterPlaces: function filterPlacesFn(centerPointLatitude,centerPointLongitude){
-		var data;
-		const xhttp = new XMLHttpRequest();
-		xhttp.open('GET', 'Filtrados.json', true); 
-		xhttp.send();
-		xhttp.onreadystatechange = function(){
-		if (this.readyState == 4 && this.status == 200){
-			let datosJson = JSON.parse(this.responseText);
-				data=getLugares(centerPointLatitude,centerPointLongitude, datosJson,  null);
-				World.loadPoisFromPlacesArray(data);
-				World.isRequestingData = false;
-			}
-		}
+	filterPlaces: function filterPlacesFn(categoryArray){
+		for (var i = 0; i < World.markerList.length ; i++) {
+            if(!pertenece(categoryArray,World.markerList[i].category)){
+                World.markerList[i].markerObject.enabled=false;
+            }else{
+                World.markerList[i].markerObject.enabled=true;
+            }
+        }
 	},
-    */
+    
 	
     requestDataFromServer: function requestDataFromServerFn(centerPointLatitude, centerPointLongitude) {
         function requestDataAfterLoad(){
