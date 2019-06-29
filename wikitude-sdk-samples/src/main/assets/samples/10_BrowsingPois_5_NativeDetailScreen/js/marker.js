@@ -19,6 +19,27 @@ function Marker(place) {
     /* Create the AR.GeoLocation from the poi data. */
     var markerLocation = new AR.GeoLocation(place.geopoint.lat, place.geopoint.long, place.geopoint.alt);
 
+    var markerDraw;
+    var markerDrawSelected;
+
+    switch (this.place.category) {
+        case "Turistico":
+            markerDraw= World.markerTuristicoDrawableIdle;
+            markerDrawSelected= World.markerTuristicoDrawableSelected;
+        case "Restaurant":
+            markerDraw= World.markerRestaurantDrawableIdle;
+            markerDrawSelected= World.markerRestaurantDrawableSelected;
+        case "Cafeteria":
+            markerDraw= World.markerCafeteriaDrawableIdle;
+            markerDrawSelected= World.markerCafeteriaDrawableSelected;
+        case "Bar": 
+            markerDraw= World.markerBarDrawableIdle;
+            markerDrawSelected= World.markerBarDrawableSelected;
+        default:
+            markerDraw= World.markerTuristicoDrawableIdle;
+            markerDrawSelected= World.markerTuristicoDrawableSelected;
+    }
+
     /* Create an AR.ImageDrawable for the marker in idle state. */
     this.markerDrawableIdle = new AR.ImageDrawable(World.markerDrawableIdle, 2.5, {
         zOrder: 0,
