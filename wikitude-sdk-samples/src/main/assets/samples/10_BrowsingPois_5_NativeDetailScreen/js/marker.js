@@ -26,18 +26,28 @@ function Marker(place) {
         case "Turistico":
             markerDraw= World.markerTuristicoDrawableIdle;
             markerDrawSelected= World.markerTuristicoDrawableSelected;
+            AR.logger.debug("Punto es turistico");
+            break;
         case "Restaurant":
             markerDraw= World.markerRestaurantDrawableIdle;
             markerDrawSelected= World.markerRestaurantDrawableSelected;
+            AR.logger.debug("Punto es restaurant");
+            break;
         case "Cafeteria":
             markerDraw= World.markerCafeteriaDrawableIdle;
             markerDrawSelected= World.markerCafeteriaDrawableSelected;
+            AR.logger.debug("Punto es cafeteria");
+            break;
         case "Bar": 
             markerDraw= World.markerBarDrawableIdle;
             markerDrawSelected= World.markerBarDrawableSelected;
+            AR.logger.debug("Punto es bar");
+            break;
         default:
             markerDraw= World.markerTuristicoDrawableIdle;
             markerDrawSelected= World.markerTuristicoDrawableSelected;
+            AR.logger.debug("Punto es default");
+            break;
     }
 
     /* Create an AR.ImageDrawable for the marker in idle state. */
@@ -197,8 +207,6 @@ Marker.prototype.setSelected = function(marker) {
         var titleLabelResizeAnimationX = new AR.PropertyAnimation(
             marker.titleLabel, 'scale.x', null, 1.2, resizeAnimationDuration, easingCurve);
         /* Create AR.PropertyAnimation that animates the scaling of the description label to 1.2. */
-        var descriptionLabelResizeAnimationX = new AR.PropertyAnimation(
-            marker.descriptionLabel, 'scale.x', null, 1.2, resizeAnimationDuration, easingCurve);
 
         /* Create AR.PropertyAnimation that animates the scaling of the idle-state-drawable to 1.2. */
         var idleDrawableResizeAnimationY = new AR.PropertyAnimation(
@@ -210,8 +218,6 @@ Marker.prototype.setSelected = function(marker) {
         var titleLabelResizeAnimationY = new AR.PropertyAnimation(
             marker.titleLabel, 'scale.y', null, 1.2, resizeAnimationDuration, easingCurve);
         /* Create AR.PropertyAnimation that animates the scaling of the description label to 1.2. */
-        var descriptionLabelResizeAnimationY = new AR.PropertyAnimation(
-            marker.descriptionLabel, 'scale.y', null, 1.2, resizeAnimationDuration, easingCurve);
 
         /*
             There are two types of AR.AnimationGroups. Parallel animations are running at the same time,
@@ -223,11 +229,9 @@ Marker.prototype.setSelected = function(marker) {
             idleDrawableResizeAnimationX,
             selectedDrawableResizeAnimationX,
             titleLabelResizeAnimationX,
-            descriptionLabelResizeAnimationX,
             idleDrawableResizeAnimationY,
             selectedDrawableResizeAnimationY,
             titleLabelResizeAnimationY,
-            descriptionLabelResizeAnimationY
         ]);
     }
 
@@ -267,9 +271,6 @@ Marker.prototype.setDeselected = function(marker) {
         var titleLabelResizeAnimationX = new AR.PropertyAnimation(
             marker.titleLabel, 'scale.x', null, 1.0, resizeAnimationDuration, easingCurve);
         /* Create AR.PropertyAnimation that animates the scaling of the description label to 1.0. */
-        var descriptionLabelResizeAnimationX = new AR.PropertyAnimation(
-            marker.descriptionLabel, 'scale.x', null, 1.0, resizeAnimationDuration, easingCurve);
-        /* Create AR.PropertyAnimation that animates the scaling of the idle-state-drawable to 1.0. */
         var idleDrawableResizeAnimationY = new AR.PropertyAnimation(
             marker.markerDrawableIdle, 'scale.y', null, 1.0, resizeAnimationDuration, easingCurve);
         /* Create AR.PropertyAnimation that animates the scaling of the selected-state-drawable to 1.0. */
@@ -279,8 +280,6 @@ Marker.prototype.setDeselected = function(marker) {
         var titleLabelResizeAnimationY = new AR.PropertyAnimation(
             marker.titleLabel, 'scale.y', null, 1.0, resizeAnimationDuration, easingCurve);
         /* Create AR.PropertyAnimation that animates the scaling of the description label to 1.0. */
-        var descriptionLabelResizeAnimationY = new AR.PropertyAnimation(
-            marker.descriptionLabel, 'scale.y', null, 1.0, resizeAnimationDuration, easingCurve);
 
         /*
             There are two types of AR.AnimationGroups. Parallel animations are running at the same time,
@@ -292,11 +291,9 @@ Marker.prototype.setDeselected = function(marker) {
             idleDrawableResizeAnimationX,
             selectedDrawableResizeAnimationX,
             titleLabelResizeAnimationX,
-            descriptionLabelResizeAnimationX,
             idleDrawableResizeAnimationY,
             selectedDrawableResizeAnimationY,
             titleLabelResizeAnimationY,
-            descriptionLabelResizeAnimationY
         ]);
     }
 

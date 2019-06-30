@@ -39,6 +39,9 @@ var listOfFiltrados = [];
         }
     }
 
+    function cerrarPanel(){
+        $( "#panel-poidetail" ).panel( "close" );
+    }
 
     function btnBar(){
         AR.logger.debug("puse bar");
@@ -87,9 +90,18 @@ var World = {
     initiallyLoadedData: false,
 
     /* Different POI-Marker assets. */
-    markerDrawableIdle: null,
-    markerDrawableSelected: null,
+    markerTuristicoDrawableIdle: null,
+    markerTuristicoDrawableSelected: null,
     markerDrawableDirectionIndicator: null,
+
+    markerCafeteriaDrawableIdle: null,
+    markerCafeteriaDrawableSelected: null,
+
+    markerBarDrawableIdle: null,
+    markerBarDrawableSelected: null,
+
+    markerRestaurantDrawableIdle: null,
+    markerRestaurantDrawableSelected: null,
 
     /* List of AR.GeoObjects that are currently shown in the scene / World. */
     markerList: [],
@@ -125,10 +137,10 @@ var World = {
             onError: World.onError
         });
 
-        World.markerRestauranteDrawableIdle = new AR.ImageResource("assets/locationRestaurante.png", {
+        World.markerRestaurantDrawableIdle = new AR.ImageResource("assets/locationRestaurant.png", {
             onError: World.onError
         });
-        World.markerRestauranteDrawableSelected = new AR.ImageResource("assets/locationRestauranteSelected.png", {
+        World.markerRestaurantDrawableSelected = new AR.ImageResource("assets/locationRestaurantSelected.png", {
             onError: World.onError
         });
 
@@ -156,7 +168,7 @@ var World = {
             let currentMarker=new Marker(placesArray[currentPlaceNr]);
             console.log(currentMarker);
             World.markerList.push(currentMarker);
-            if (currentMarker.markerObject.locations[0].distanceToUser()>500){
+            if (currentMarker.markerObject.locations[0].distanceToUser()>2000){
                 currentMarker.markerObject.enabled=false;
             }
         }
