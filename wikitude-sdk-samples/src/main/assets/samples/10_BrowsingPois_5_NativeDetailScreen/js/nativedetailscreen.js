@@ -9,6 +9,68 @@ var ServerInformation = {
     POIDATA_SERVER_ARG_NR_POIS: "nrPois"
 };
 
+var listOfFiltrados = [];
+    
+    function btnRestaurant(){
+        AR.logger.debug("puse restaurant");
+        let arrayIndex=listOfFiltrados.indexOf("Restaurant");
+        if(arrayIndex!=-1){ // Estaba seleccionado
+            document.getElementById("btnRes").style.backgroundImage='linear-gradient(#fff,#f1f1f1)';
+            document.getElementById("btnRes").style.color='#222';
+            listOfFiltrados.splice(arrayIndex,1);
+        }else{ //Se está arreglando
+            document.getElementById("btnRes").style.backgroundImage='linear-gradient(#e16880,#d94461)';
+            document.getElementById("btnRes").style.color='#fff';
+            listOfFiltrados.push("Restaurant");
+        }
+    }
+
+    function btnCafeteria(){
+        AR.logger.debug("puse cafe");
+        let arrayIndex=listOfFiltrados.indexOf("Cafeteria");
+        if(arrayIndex!=-1){ // Estaba seleccionado
+            document.getElementById("btnCaf").style.backgroundImage='linear-gradient(#fff,#f1f1f1)';
+            document.getElementById("btnCaf").style.color='#222';
+            listOfFiltrados.splice(arrayIndex,1);
+        }else{ //Se está arreglando
+            document.getElementById("btnCaf").style.backgroundImage='linear-gradient(#9e5635,#8f5330)';
+            document.getElementById("btnCaf").style.color='#fff';
+            listOfFiltrados.push("Cafeteria");
+        }
+    }
+
+
+    function btnBar(){
+        AR.logger.debug("puse bar");
+        let arrayIndex=listOfFiltrados.indexOf("Bar");
+        if(arrayIndex!=-1){ // Estaba seleccionado
+            document.getElementById("btnBar").style.backgroundImage='linear-gradient(#fff,#f1f1f1)';
+            listOfFiltrados.splice(arrayIndex,1);
+        }else{ //Se está arreglando
+            document.getElementById("btnBar").style.backgroundImage='linear-gradient(#ffefaa,#ffe155)';
+            listOfFiltrados.push("Bar");
+        }
+    }
+
+    function btnTuristico(){
+        AR.logger.debug("puse turistico");
+        let arrayIndex=listOfFiltrados.indexOf("Turistico");
+        if(arrayIndex!=-1){ // Estaba seleccionado
+            document.getElementById("btnTur").style.backgroundImage='linear-gradient(#fff,#f1f1f1)';
+            document.getElementById("btnTur").style.color='#222';
+            listOfFiltrados.splice(arrayIndex,1);
+        }else{ //Se está arreglando
+            document.getElementById("btnTur").style.backgroundImage='linear-gradient(#5f9cc5,#396b9e)';
+            document.getElementById("btnTur").style.color='#fff';
+            listOfFiltrados.push("Turistico");
+        }
+    }
+
+    function btnFiltrar(){
+        AR.logger.debug("antes filt");
+        World.filterPlaces(listOfFiltrados);
+    }
+
 /* Implementation of AR-Experience (aka "World"). */
 var World = {
 
@@ -37,6 +99,9 @@ var World = {
 
     locationUpdateCounter: 0,
     updatePlacemarkDistancesEveryXLocationUpdates: 10,
+
+
+
 
     /* Called to inject new POI data. */
     loadPoisFromPlacesArray: function loadPoisFromPlacesArrayFn(placesArray) {
@@ -406,8 +471,10 @@ var World = {
 		
 
 	filterPlaces: function filterPlacesFn(categoryArray){
+        console.log("filtro llamado con:");
+        console.log(categoryArray);
 		for (var i = 0; i < World.markerList.length ; i++) {
-            if(!pertenece(categoryArray,World.markerList[i].category)){
+            if(!pertenece(categoryArray,World.markerList[i].place.category)){
                 World.markerList[i].markerObject.enabled=false;
             }else{
                 World.markerList[i].markerObject.enabled=true;
