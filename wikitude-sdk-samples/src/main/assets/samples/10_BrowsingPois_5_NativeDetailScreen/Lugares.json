@@ -4,8 +4,8 @@
         "name": "Municipalidad",
         "description": "Municipalidad de la ciudad de Tandil ",
         "category": "Turistico",
-        "lat": -37.329528,
-        "long": -59.1378052,
+        "lat": -37.329809,
+        "long": -59.136778,
         "imgsrc": "img/municipalidad.jpg"
     },
     {
@@ -13,8 +13,8 @@
         "name": "Iglesia",
         "description": "Iglesia del Santisimo Sacramento",
         "category": "Turistico",
-        "lat": -37.3293707,
-        "long": -59.1384875,
+        "lat": -37.32937,
+        "long": -59.136301,
         "imgsrc": "img/iglesia.jpg"
     },
     {
@@ -22,8 +22,8 @@
         "name": "Bodegón del Fuerte",
         "description": "Pub con cerveza artesana y comida gourmet",
         "category": "Bar",
-        "lat": -37.3291493,
-        "long": -59.1376608 ,
+        "lat": -37.329148,
+        "long": -59.135472,
         "imgsrc": "img/bodegon.jpg"
     }, 
     {
@@ -31,8 +31,8 @@
         "name": "Iglu Helados",
         "description": "Heladería y Cafetería Iglu",
         "category": "Cafeteria",
-        "lat": -37.3278864,
-        "long": -59.1379847,
+        "lat":  -37.327858,
+        "long": -59.135716,
         "imgsrc": "img/iglu.png"
     },
     {
@@ -40,8 +40,8 @@
         "name": "Cheverry",
         "description": "Cervecería artesanal marplatense",
         "category": "Bar",
-        "lat": -37.3275726,
-        "long": -59.1372661,
+        "lat": -37.327572,
+        "long": -59.135875,
         "imgsrc": "img/cheverry.jpg"
     },
     {
@@ -49,8 +49,8 @@
         "name": "Rana Baris",
         "description": "Restaurant, Pizzería y Cafetería",
         "category": "Restaurant",
-        "lat": -37.328006,
-        "long": -59.1395147,
+        "lat": -37.328005,
+        "long": -59.137328,
         "imgsrc": "img/rana.jpg"
     }, 
     {
@@ -58,8 +58,8 @@
         "name": "Piaf",
         "description": "Cervecería artesanal de época",
         "category": "Bar",
-        "lat": -37.3280426,
-        "long": -59.1395623,
+        "lat": -37.328027,
+        "long": -59.137409,
         "imgsrc": "img/piaf.jpg"
     }, 
     {
@@ -67,8 +67,8 @@
         "name": "Rectorado",
         "description": "",
         "category": "Turistico",
-        "lat": -37.3286036,
-        "long": -59.140775,
+        "lat": -37.328602,
+        "long": -59.138586,
         "imgsrc": "img/rectorado.jpg"
     },
     {
@@ -76,8 +76,8 @@
         "name": "Hotel Plaza",
         "description": "Hotel tradicional de la ciudad de 3 estrellas",
         "category": "Turistico",
-        "lat": -37.3282044,
-        "long":-59.1403843,
+        "lat": -37.328203,
+        "long":-59.138197,
         "imgsrc": "img/hotel.jpg"
     },
     {
@@ -85,8 +85,8 @@
         "name": "Nice",
         "description": "Nucleo de Inteligencia Comportamental Empresarial",
         "category": "Turistico",
-        "lat": -37.3216423,
-        "long": -59.0826197,
+        "lat": -37.321487,
+        "long": -59.082222,
         "imgsrc": "img/nice.jpg"
     },
     {
@@ -94,8 +94,8 @@
         "name": "Comedor",
         "description": "Comedor Autogestionado de la UNCPBA",
         "category": "Restautant",
-        "lat": -37.3232162,
-        "long":-59.0820107,
+        "lat": -37.321758,
+        "long":-59.081157,
         "imgsrc": "img/comedor.jpg"
     },
     {
@@ -103,8 +103,8 @@
         "name": "Biblioteca",
         "description": "Biblioteca Central da la UNCPBA",
         "category": "Turistico",
-        "lat": -37.3232162,
-        "long":-59.0820107,
+        "lat": -37.322743,
+        "long":-59.079779,
         "imgsrc": "img/hotel.jpg"
     },
     {
@@ -112,8 +112,8 @@
         "name": "Gimnasio",
         "description": "Gimnasio de la UNCPBA donde podés enconrar la Secretaría de Bienestar Estudiantil y la Secretaría de Deportes",
         "category": "Turistico",
-        "lat": -37.3230711,
-        "long": -59.0857229,
+        "lat": -37.323072,
+        "long": -59.083534,
         "imgsrc": "img/gimnasio.jpg"
     }
 ]
