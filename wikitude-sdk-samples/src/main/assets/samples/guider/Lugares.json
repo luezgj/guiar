@@ -1,74 +1,119 @@
 [
     {
         "id":0,
-        "name": "Gluck",
-        "description": "Descripción de Gluck",
-        "category": "Cerveceria",
-        "lat": -37.3234057,
-        "long": -59.1407575 
+        "name": "Municipalidad",
+        "description": "Municipalidad de la ciudad de Tandil ",
+        "category": "Turistico",
+        "lat": -37.329528,
+        "long": -59.1378052,
+        "imgsrc": "img/municipalidad.jpg"
     },
     {
         "id":1,
-        "name": "Adorado",
-        "description": "Descripción de Adorado",
-        "category": "Cafeteria",
-        "lat": -37.3268144,
-        "long": -59.1358801 
+        "name": "Iglesia",
+        "description": "Iglesia del Santisimo Sacramento",
+        "category": "Turistico",
+        "lat": -37.3293707,
+        "long": -59.1384875,
+        "imgsrc": "img/iglesia.jpg"
     },
     {
         "id":2,
-        "name": "Lo de Martin",
-        "description": "Descripción de Lo de Martin",
-        "category": "Restaurant",
-        "lat": -37.3210489,
-        "long": -59.1438484 
+        "name": "Bodegón del Fuerte",
+        "description": "Pub con cerveza artesana y comida gourmet",
+        "category": "Bar",
+        "lat": -37.3291493,
+        "long": -59.1376608 ,
+        "imgsrc": "img/bodegon.jpg"
     }, 
     {
         "id":3,
-        "name": "OGHAM",
-        "description": "Descripción de OGHAM",
-        "category": "Cerveceria",
-        "lat": -37.327253,
-        "long": -59.1376847 
-    }, 
+        "name": "Iglu Helados",
+        "description": "Heladería y Cafetería Iglu",
+        "category": "Cafeteria",
+        "lat": -37.3278864,
+        "long": -59.1379847,
+        "imgsrc": "img/iglu.png"
+    },
     {
         "id":4,
-        "name": "Rana Baris",
-        "description": "Descripción de Rana Baris",
-        "category": "Restaurant",
-        "lat": -37.328006,
-        "long": -59.1395147 
-    }, 
+        "name": "Cheverry",
+        "description": "Cervecería artesanal marplatense",
+        "category": "Bar",
+        "lat": -37.3275726,
+        "long": -59.1372661,
+        "imgsrc": "img/cheverry.jpg"
+    },
     {
         "id":5,
-        "name": "Figlio",
-        "description": "Descripción de Figlio",
-        "category": "Cafeteria",
-        "lat": -37.3267643,
-        "long": -59.1386927 
+        "name": "Rana Baris",
+        "description": "Restaurant, Pizzería y Cafetería",
+        "category": "Restaurant",
+        "lat": -37.328006,
+        "long": -59.1395147,
+        "imgsrc": "img/rana.jpg"
     }, 
     {
         "id":6,
-        "name": "Mitre y Moreno",
-        "description": "",
-        "category": "Turistico",
-        "lat": -37.318291,
-        "long": -59.123204
-    },
+        "name": "Piaf",
+        "description": "Cervecería artesanal de época",
+        "category": "Bar",
+        "lat": -37.3280426,
+        "long": -59.1395623,
+        "imgsrc": "img/piaf.jpg"
+    }, 
     {
         "id":7,
-        "name": "Roca y San Martin",
+        "name": "Rectorado",
         "description": "",
-        "category": "Restaurant",
-        "lat": -37.322496,
-        "long": -59.126330
+        "category": "Turistico",
+        "lat": -37.3286036,
+        "long": -59.140775,
+        "imgsrc": "img/rectorado.jpg"
     },
     {
         "id":8,
-        "name": "Roca y Sarmiento",
-        "description": "",
+        "name": "Hotel Plaza",
+        "description": "Hotel tradicional de la ciudad de 3 estrellas",
         "category": "Turistico",
-        "lat": -37.321242,
-        "long": -59.126872
+        "lat": -37.3282044,
+        "long":-59.1403843,
+        "imgsrc": "img/hotel.jpg"
+    },
+    {
+        "id":9,
+        "name": "Nice",
+        "description": "Nucleo de Inteligencia Comportamental Empresarial",
+        "category": "Turistico",
+        "lat": -37.3216423,
+        "long": -59.0826197,
+        "imgsrc": "img/nice.jpg"
+    },
+    {
+        "id":10,
+        "name": "Comedor",
+        "description": "Comedor Autogestionado de la UNCPBA",
+        "category": "Restautant",
+        "lat": -37.3232162,
+        "long":-59.0820107,
+        "imgsrc": "img/comedor.jpg"
+    },
+    {
+        "id":11,
+        "name": "Biblioteca",
+        "description": "Biblioteca Central da la UNCPBA",
+        "category": "Turistico",
+        "lat": -37.3232162,
+        "long":-59.0820107,
+        "imgsrc": "img/hotel.jpg"
+    },
+    {
+        "id":12,
+        "name": "Gimnasio",
+        "description": "Gimnasio de la UNCPBA donde podés enconrar la Secretaría de Bienestar Estudiantil y la Secretaría de Deportes",
+        "category": "Turistico",
+        "lat": -37.3230711,
+        "long": -59.0857229,
+        "imgsrc": "img/gimnasio.jpg"
     }
 ]

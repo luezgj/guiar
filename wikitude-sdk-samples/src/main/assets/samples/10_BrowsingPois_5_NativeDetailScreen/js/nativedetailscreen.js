@@ -497,7 +497,7 @@ var World = {
 	
     requestDataFromServer: function requestDataFromServerFn(centerPointLatitude, centerPointLongitude) {
         function requestDataAfterLoad(){
-            var data = getLugares(new GeoPoint(centerPointLatitude, centerPointLongitude, null), ["Cerveceria","Cafeteria","Restaurant","Turistico"]/*Traer todos los tipos de lugares*/,  10/*Traer lugares hasta 10km*/);
+            var data = getLugares(new GeoPoint(centerPointLatitude, centerPointLongitude, null), ["Bar","Cafeteria","Restaurant","Turistico"]/*Traer todos los tipos de lugares*/,  10/*Traer lugares hasta 10km*/);
             console.log("Lugares traidos del servidor:");
             console.log(data);
             World.loadPoisFromPlacesArray(data);
