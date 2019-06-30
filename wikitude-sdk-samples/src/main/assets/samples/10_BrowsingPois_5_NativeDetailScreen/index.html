@@ -45,9 +45,28 @@
     <!-- MAIN PAGE CONTENT -->
     <!-- header of UI holding feature buttons -->
     <div id="header-status" data-role="header" data-position="fixed" data-theme="c">
-        <a href="javascript: World.showRange();" data-icon="gear" data-inline="true" data-mini="true">Range</a>
-        <a href="javascript: World.llamarGuia();" data-icon="refresh">Llamar guia</a>
-        <h1></h1>
+        <div class="ui-grid-d">
+            <div class="ui-block-a">
+            <a href="#" data-role="button" id="btnTur" data-theme="c" data-inline="true" onclick="btnTuristico();">Turistico</a>
+            </div>
+
+            <div class="ui-block-b">
+            <a href="#" data-role="button" id="btnRes" data-theme="c" data-inline="true" onclick="btnRestaurant();">Restaurant</a>
+            </div>
+
+            <div class="ui-block-c">
+            <a href="#" data-role="button" id="btnCaf" data-theme="c" data-inline="true" onclick="btnCafeteria();">Cafeteria</a>
+            </div>
+
+            <div class="ui-block-d">
+            <a href="#" data-role="button" id="btnBar" data-theme="c" data-inline="true" onclick="btnBar();">Bar</a>
+            </div>
+
+            <div class="ui-block-e">
+            <a href="#" data-role="button" data-theme="a" data-inline="true" onclick="btnFiltrar();">Filtrar</a>
+            </div>
+            
+        </div>
     </div>
 
     <!-- the radar div - Wikitude SDK radar will be drawn into this div -->

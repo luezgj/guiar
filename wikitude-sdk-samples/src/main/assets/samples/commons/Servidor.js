@@ -23,11 +23,11 @@ function traerDatosJson(callback){ // LEVANTA EL ARCHIVO JSON Y LO GUARDA EN LIS
 }
 
 var pertenece = function(categorias, category){
-    for (var item of categorias)
+    for (var item of categorias){
         if (item === category){
-            console.log(item+";"+category);
             return true;
         }
+    }
     return false;
 }
 

@@ -41,7 +41,7 @@ function Marker(place) {
     }
 
     /* Create an AR.ImageDrawable for the marker in idle state. */
-    this.markerDrawableIdle = new AR.ImageDrawable(World.markerDrawableIdle, 2.5, {
+    this.markerDrawableIdle = new AR.ImageDrawable(markerDraw, 2.5, {
         zOrder: 0,
         opacity: 1.0,
         /*
@@ -55,7 +55,7 @@ function Marker(place) {
     });
 
     /* Create an AR.ImageDrawable for the marker in selected state. */
-    this.markerDrawableSelected = new AR.ImageDrawable(World.markerDrawableSelected, 2.5, {
+    this.markerDrawableSelected = new AR.ImageDrawable(markerDrawSelected, 2.5, {
         zOrder: 0,
         opacity: 0.0,
         onClick: null
@@ -64,16 +64,12 @@ function Marker(place) {
     /* Create an AR.Label for the marker's title . */
     this.titleLabel = new AR.Label(place.name.trunc(10), 1, {
         zOrder: 1,
+        translate: {
+            y: 0.55
+        },
         style: {
             textColor: '#FFFFFF',
             fontStyle: AR.CONST.FONT_STYLE.BOLD
-        }
-    });
-
-    this.descriptionLabel = new AR.Label(place.description.trunc(15), 0.8, {
-        zOrder: 1,
-        style: {
-            textColor: '#FFFFFF'
         }
     });
 
@@ -124,7 +120,7 @@ function Marker(place) {
     */
     this.markerObject = new AR.GeoObject(markerLocation, {
         drawables: {
-            cam: [this.markerDrawableIdle, this.markerDrawableSelected, this.titleLabel, this.descriptionLabel],
+            cam: [this.markerDrawableIdle, this.markerDrawableSelected, this.titleLabel],
             indicator: this.directionIndicatorDrawable,
             radar: this.radardrawables
         }
